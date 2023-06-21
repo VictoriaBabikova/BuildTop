@@ -1,0 +1,211 @@
+ @media (max-width: 1750px) and (min-width: 1650px) {
+    .wrap {
+        width: 50%;
+   }
+   .cont_img { 
+        width: 50%;   
+   }
+} 
+  @media (max-width: 1651px) and (min-width: 1251px) {
+    .wrap {
+        width: 50%; 
+        order: 1;
+   }
+   .cont_img {  
+        width: 50%;
+        order: 2;
+        background-position-x: 45%;
+        /* top: 5px;  */
+        background-size: auto;
+   }
+}  
+@media (max-width: 1250px) and (min-width: 799px) {
+    .wrap {
+        width: 50%;
+        min-width: 350px;
+   } 
+   .cont_img {
+        width: 50%;
+        min-width: 300px;
+   }
+}
+@media (max-width: 798px) and (min-width: 250px) {
+    .wrap {
+        width: 100%;
+        min-width: 355px;
+   } 
+   .cont_img {
+        width: 100%;
+        min-width: 355px;
+   }
+    .container {
+        padding: 0; 
+    }
+     .footor_forum {
+        position: relative;
+    }
+    header {
+        background-image: url(../img/header-2.png);
+        background-position-y: -133px;
+    }
+    .cont h1,.cont h2 {
+        font-size: 2rem;
+    }
+    .cont ul {
+        width: 100%;
+    }
+    .cont li {
+        width: 90%;
+        margin:12px auto;
+    }
+    .cont li::before {
+    width: 22px;
+    height: 32px;
+    top: -1em;
+    left: -1.3rem;
+    }
+    .cont div {
+        padding-top: 10px;
+    }
+    .container_adm_panel_1 {
+    display: flex;
+    flex-direction: column;
+    }
+    #make_order {
+        width: 100%;
+    }
+    .admin-button_5,.admin-button_6,.admin-button_7 {
+        position:relative;
+        width: 80% !important;
+        left:0%;
+        top:4%;
+    }
+    .admin-button_1 {
+        top: 91.5%;
+    }
+    .wrap_button_1 {
+        height: 158px !important;
+    }
+    .container_adm_panel {
+        flex-wrap: wrap;
+    }
+    .container_adm_panel,.container_adm_panel_1,.container_adm_panel_2 {
+        width: 95%;
+    }
+    .container_adm_panel h2,.container_adm_panel div {
+        width: 100%;
+        padding: 10px 0;
+    }
+    .container_form {
+        width: 90%;
+        padding-top:10px;
+    }
+    .wraper_panel {
+        padding: 0;
+    }
+    .site-bar {
+        width: 100%;
+        position: relative;
+    }
+    .main_content::before {
+    background-image: url(../img/rob_mini.png);
+    }
+    .bottom {
+        margin-bottom: 65px;
+    }
+    .footer_forum {
+        left: 10px;
+    }
+    .moder_message {
+        position: relative;
+        width: 100%;
+    }
+    #change_order {
+        width: 100%;
+    }
+    .docs,.container_rules {
+        padding: 7px 23px;
+    }
+    .container_rules {
+        text-align: justify;
+    }
+    .table_user th, tr, td {
+        padding:5px;
+    }
+    .table_user table {
+        padding: 5px 3px;
+    }
+    .auth_message {
+        width: 90%;
+        margin: 10px auto;
+        text-align: justify;
+    }
+   
+}
+@media (max-width: 422px) { 
+     #login-form {
+        border-radius:0;
+    }
+}
+
+@media (max-width: 1250px) and (min-width: 250px) {
+    .container_grid {
+        display: flex !important;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .wrap {
+        order: 1;
+        width: 80%;
+   } 
+   .cont_img {
+        order: 2;
+        background-position-x: 45%;
+        top: 5px; 
+        background-size: auto;
+   }
+    .nav {
+        display: flex;
+        flex-direction: column;
+    }
+    footer {
+        flex-direction: column;
+    }
+    .footer_menu_1, .footer_menu_2 {
+        text-align: center;
+    }
+    footer, .copyright, header {
+        border-radius: 0;
+    }
+    .cont {
+        width: 90%;
+        margin: 0 auto;
+        padding: 0;
+    }
+    #form_header {
+        width: 95%;
+    }
+    #form_header > input {
+        height: auto;
+    }
+    .modal_window {
+        width: 67%;
+        height: 40%;
+        top:35%;
+        left:17%;
+    }
+    header div {
+        justify-content: flex-start;
+    }
+    .cont ul {
+        width: 100%;
+    }
+    .site-bar {
+        width: 100%;
+        position: relative;
+    }
+    .container {
+        min-height: 53.3vh;
+    }
+    
+}
