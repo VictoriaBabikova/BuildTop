@@ -10,11 +10,11 @@
                         </div>
                         <input type="hidden" name="id" value="<?php print_r($_SESSION['id']) ?>">
                         <label for="order_city">Укажите город</label>
-                        <input type="text" name="order_city" required placeholder="Мосва">
+                        <input type="text" name="order_city" id="order_city" required placeholder="Мосва">
                         <label for="order_tel">Введите телефон для связи в формате: +78915545643</label>
-                        <input type="tel" name="order_tel" required placeholder="+7">
+                        <input type="tel" name="order_tel" id="order_tel" required placeholder="+7">
                         <label for="order_content">Опишите заказ</label>
-                        <textarea rows="10" cols="35" name="order_content" required></textarea>
+                        <textarea rows="10" cols="35" name="order_content" id="order_content" required></textarea>
                         <input type="submit" value="ОТПРАВИТЬ НА МОДЕРАЦИЮ" name="make_new_order">
                     </form>
                </div> 

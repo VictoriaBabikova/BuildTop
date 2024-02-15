@@ -5,7 +5,7 @@
             <form action="/save_password" method="post" id="formId" enctype="application/x-www-form-urlencoded">
                 <input type="hidden" name="name" value="<?php print_r($_GET['user_name']) ?>"><br>
                 <input type="hidden" name="email" value="<?php print_r($_GET['email']) ?>"><br>
-                <label for="name">Укажите новый пароль</label>
+                <label for="password-input">Укажите новый пароль</label>
                 <input type="password" id="password-input" name="password" required value="Пароль" onBlur="if(this.value=='')this.value='Пароль'" onFocus="if(this.value=='Пароль')this.value='' ">
                 <?php isset($message_user) ? print $message_user : '' ?>
                 <?php isset($message) ? print $message : '' ?>

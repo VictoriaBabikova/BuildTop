@@ -15,14 +15,14 @@ require_once('../include/capcha.php');
                 </div>
                 <?php isset($message_user) ? print $message_user : '' ?>
                 <div class="wrap_captcha">
-                    <label for name=" text_kapcha">
+                    <label for="text_capcha">
                         Пожалуйста, напишите <br>
                         <img width="120px" height="120" src="./css/capcha/<?= $array[$array_rand] ?>.jpg" title="<?= $word ?>">&nbsp;,<br>
                         если сомневаетесь наведите мышку на картинку <br>
                         <?php isset($message) ? print $message : '' ?>
                     </label>
                 </div>
-                 <select name="text_capcha" required>
+                <select name="text_capcha" id="text_capcha" required>
                     <option value="" disabled>выберите название животного</option>
                     <option value="слон">слон</option>
                     <option value="кот">кот</option>
@@ -35,7 +35,7 @@ require_once('../include/capcha.php');
                 <input type="hidden" name="hidden_capcha" value="<?= $word ?>"><br>
                 <div class="checkbox_reg">
                     <input type="checkbox" name="remember" id="rememberMy">
-                    <label for="remebber">запомнить меня</label>
+                    <label for="rememberMy">запомнить меня</label>
                 </div>
                 <input type="submit" value="ВОЙТИ" name="RegisterSubmit">
             </form>

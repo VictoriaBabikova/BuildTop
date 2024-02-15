@@ -8,11 +8,11 @@
                 </div>
                 <form action="/profile" method="post" id="formId">
                     <?php foreach ($arrayUser as $key => $value) : ?>
-                        <label for name='name'>Логин</label>
+                        <label for='user_name'>Логин</label>
                         <input type="text" id="user_name" name="name" required value="<?= $value['user_name'] ?>">
-                        <label for name='email'>Почта</label>
+                        <label for='user_email'>Почта</label>
                         <input type="email" name="email" id="user_email" required value="<?= $value['user_email'] ?>">
-                        <label for name='password'>Введите пароль или создайте новый</label>
+                        <label for='password'>Введите пароль или создайте новый</label>
                         <input type="text" name="password" id="password" required value="" placeholder="пароль">
                         <p style="padding:5px 0;">Дата регистрации: <?= $value['user_date'] ?></p>
                         <p style="padding:5px 0;">Статус вашего аккаунта:

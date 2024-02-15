@@ -10,9 +10,8 @@
                         </div>
                         <input type="hidden" name="id" value="<?php print_r($_SESSION['id']) ?>">
                         <input type="hidden" name="path_REFERER" value="<?php print_r($id_topic) ?>">
-                        <label for="new_post">Напишите сообщение
-                        </label>
-                        <textarea rows="10" cols="35" name="new_post" required></textarea>
+                        <label for="new_post">Напишите сообщение</label>
+                        <textarea rows="10" cols="35" name="new_post" id="new_post" required></textarea>
                         <input type="submit" value="ОТПРАВИТЬ" name="make_new_post">
                     </form>
                     <p>* после отправки сообщение сразу же появится в теме обсуждения!</p>

@@ -14,7 +14,7 @@
                     <a href="/reset_password">Забыли пароль?</a>
                     <div>
                         <input type="checkbox" name="remember" id="rememberMy">
-                        <label for="remebber">запомнить меня</label>
+                        <label for="rememberMy">запомнить меня</label>
                     </div>
                 </div>
                 <input type="submit" value="ВОЙТИ" name="AuthSubmit">
