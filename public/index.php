@@ -2,7 +2,7 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-require_once "../include/function.php";
+use App\ParseDataRequest;
 
 $arguments = [];
 $arguments['id_topic'] = null;
@@ -16,7 +16,7 @@ $URIParts = explode('?', $_SERVER['REQUEST_URI']);
 if (! empty($URIParts)) {
     if (isset($URIParts[1])) {
         $params = $URIParts[1];
-        $getParamArr = parseApplicationContent($params);
+        $getParamArr = ParseDataRequest::parseApplicationContent($params);
         foreach ($getParamArr as $key => $value) {
             if ($key == "id_topic") {
                 $arguments['id_topic'] = $value;
