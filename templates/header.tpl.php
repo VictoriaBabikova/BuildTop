@@ -7,7 +7,7 @@ if (isset($_COOKIE['id_auth_user'])) {
     App\Controller\User::authWithCookie($_COOKIE['id_auth_user']);
 }
 
-$messages_arr = getMessagesArr();
+$messages_arr = App\Controller\Admin::getMessagesArr();
 
 // *** finding of user location ***
 

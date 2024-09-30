@@ -372,7 +372,7 @@ class User
             $sql['sql'] = 'SELECT * FROM `orders_moder_redact`';
             $order_moder_redact = Select($sql['sql']);
 
-            $messages_arr = getMessagesArr();
+            $messages_arr = Admin::getMessagesArr();
 
             $myfile = fopen("../templates/user_messages/message_user_" . $id . ".tpl.php", "c+") or die("Unable to open file!");
             $txt = "<div class='content'>

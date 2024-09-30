@@ -174,4 +174,11 @@ class Admin
             }
         }
     }
+
+    public static function getMessagesArr(): array
+    {
+        $sql = [];
+        $sql['sql'] = 'SELECT * FROM `messages`';
+        return $messages_arr =  Select($sql['sql']);
+    }
 }

@@ -2,6 +2,8 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
+require_once "../include/db.php";
+
 use App\ParseDataRequest;
 
 $arguments = [];
