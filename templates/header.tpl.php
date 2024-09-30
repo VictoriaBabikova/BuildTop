@@ -4,7 +4,7 @@ $lifetime = 3600;
 // ini_set('display_errors', 'off');
 // error_reporting(0);
 if (isset($_COOKIE['id_auth_user'])) {
-    App\User::authWithCookie($_COOKIE['id_auth_user']);
+    App\Controller\User::authWithCookie($_COOKIE['id_auth_user']);
 }
 
 $messages_arr = getMessagesArr();

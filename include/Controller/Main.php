@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Controller;
 
 use App\SendFeedBackEmail as SendEmail;
 
@@ -12,7 +12,7 @@ class Main
      * @return void
      */
     public static function index()
-    { 
+    {
         require_once "../templates/index.tpl.php";
     }
     

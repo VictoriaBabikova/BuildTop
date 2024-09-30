@@ -1,6 +1,7 @@
 <?php
 
-require_once "../include/autoload.php";
+require __DIR__.'/../vendor/autoload.php';
+
 require_once "../include/function.php";
 
 $arguments = [];
@@ -147,7 +148,7 @@ if (in_array($_SERVER['REQUEST_URI'], $arrHandlerJS)) {
         if ($_SERVER['REQUEST_URI'] === $key) {
             foreach ($uri as $key => $value) {
                 if ($_SERVER['REQUEST_METHOD'] === $key) {
-                    call_user_func('App\\'. $value, ...$arguments);
+                    call_user_func('App\Controller\\'. $value, ...$arguments);
                 }
             }
         }
@@ -159,7 +160,7 @@ if (in_array($_SERVER['REQUEST_URI'], $arrHandlerJS)) {
                 if ($_SERVER['REQUEST_METHOD'] === $key) {
                     require_once "../templates/header.tpl.php";
                     require_once "../templates/bar_menu.tpl.php";
-                    call_user_func('App\\'. $value, ...$arguments);
+                    call_user_func('App\Controller\\'. $value, ...$arguments);
                     require_once "../templates/footer.tpl.php";
                 }
             }
