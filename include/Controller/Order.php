@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
+
+use App\DB;
 
 class Order
 {
@@ -14,10 +18,10 @@ class Order
     {
         $sql = [];
         $sql['sql'] = "SELECT * FROM `users`";
-        $user_info_arr = Select($sql['sql']);
+        $user_info_arr = DB::Select($sql['sql']);
 
         $sql['sql'] = 'SELECT * FROM `orders`';
-        $orders = Select($sql['sql']);
+        $orders = DB::Select($sql['sql']);
 
         require_once "../templates/order_list.tpl.php";
     }
@@ -48,7 +52,7 @@ class Order
                 'order_by' => htmlspecialchars(trim($_POST['id'])),
             ];
     
-            Query($sql['sql'], $sql['param']);
+            DB::Query($sql['sql'], $sql['param']);
         }
         header('Location: /order_list');
     }
@@ -70,21 +74,21 @@ class Order
                     'order_by' => htmlspecialchars(trim($_POST['id'])),
                 ];
         
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
         
                 $sql['sql'] = "DELETE FROM `orders_moder_redact` WHERE orders_moder_redact.order_content =:order_content and orders_moder_redact.order_by =:order_by";
                 $sql['param'] = [
                     'order_content' => htmlspecialchars(trim($_POST['order_content'])),
                     'order_by' => htmlspecialchars(trim($_POST['id'])),
                 ];
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
         
                 $sql['sql']= "DELETE FROM `messages` WHERE messages.id_user = :id_user";
                 $sql['param'] = [
                     'id_user' => htmlspecialchars(trim($_POST['id'])),
                 ];
         
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
         
                 unlink(".../templates/user_messages/message_user_" . $_POST['id'] . ".tpl.php");
                 header('Location: /order_list');

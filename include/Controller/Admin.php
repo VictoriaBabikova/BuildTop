@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
+
+use App\DB;
 
 class Admin
 {
@@ -14,16 +18,16 @@ class Admin
         $sql = [];
 
         $sql['sql'] = "SELECT * FROM `users`";
-        $user_info_arr = Select($sql['sql']);
+        $user_info_arr = DB::Select($sql['sql']);
 
         $sql['sql'] = "SELECT * FROM `topics_moder` where topic_id = (SELECT MIN(topic_id) FROM `topics_moder`)";
-        $topics_moder = Select($sql['sql']);
+        $topics_moder = DB::Select($sql['sql']);
 
         $sql['sql']="SELECT * FROM `categories`";
-        $category = Select($sql['sql']);
+        $category = DB::Select($sql['sql']);
 
         $sql['sql'] = "SELECT * FROM `orders_moder`";
-        $order_moder_list = Select($sql['sql']);
+        $order_moder_list = DB::Select($sql['sql']);
 
         require_once "../templates/admin.tpl.php";
     }
@@ -38,7 +42,7 @@ class Admin
         $sql = [];
         
         $sql['sql'] = "SELECT * FROM `topics_moder` where topic_id = (SELECT MIN(topic_id) FROM `topics_moder`)";
-        $topics_moder = Select($sql['sql']);
+        $topics_moder = DB::Select($sql['sql']);
 
         if (isset($_POST['topic_to_moder_base'])) {
             if (isset($_POST['name_topic']) && isset($_POST['category'])) {
@@ -49,14 +53,14 @@ class Admin
                     'id_cat' => htmlspecialchars(trim($_POST['category'])),
                     'name_user' => $topics_moder[0]['topic_by'],
                 ];
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
         
                 $sql['sql'] = "DELETE FROM `topics_moder` WHERE topic_subject = :name_topic and topic_cat = :id_cat";
                 $sql['param'] = [
                     'name_topic' => htmlspecialchars(trim($_POST['name_topic'])),
                     'id_cat' => htmlspecialchars(trim($_POST['category'])),
                 ];
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
         
                 header('Location: /admin');
             }
@@ -68,7 +72,7 @@ class Admin
                     'name_topic' => htmlspecialchars(trim($_POST['name_topic'])),
                     'id_cat' => htmlspecialchars(trim($_POST['category'])),
                 ];
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
 
                 header('Location: /admin');
             }
@@ -90,7 +94,7 @@ class Admin
                     'name_category' => htmlspecialchars(trim($_POST['name_category'])),
                     'subject_category' => htmlspecialchars(trim($_POST['subject_category'])),
                 ];
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
 
                 header('Location: /admin');
             }
@@ -115,14 +119,14 @@ class Admin
                     'order_by' => htmlspecialchars(trim($_POST['id'])),
                 ];
         
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
             }
             $sql['sql'] = "DELETE FROM `orders_moder` WHERE orders_moder.order_content =:order_content and orders_moder.order_by =:order_by";
             $sql['param'] = [
                 'order_content' => htmlspecialchars(trim($_POST['order_content'])),
                 'order_by' => htmlspecialchars(trim($_POST['id'])),
             ];
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
         
             header('Location: /admin');
         }
@@ -138,14 +142,14 @@ class Admin
                     'message_from' => $message_from,
                 ];
 
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
 
                 $sql['sql'] = "DELETE FROM `orders_moder` WHERE orders_moder.order_content =:order_content and orders_moder.order_by =:order_by";
                 $sql['param'] = [
                     'order_content' => htmlspecialchars(trim($_POST['order_content'])),
                     'order_by' => htmlspecialchars(trim($_POST['id'])),
                 ];
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
 
                 $sql['sql'] = "INSERT INTO `orders_moder_redact`(orders_moder_redact.order_content, orders_moder_redact.order_date, orders_moder_redact.order_city, orders_moder_redact.order_tel, orders_moder_redact.order_by) VALUES (:order_content,NOW(),:order_city,:order_tel,:order_by)";
                 $sql['param'] = [
@@ -155,7 +159,7 @@ class Admin
                     'order_by' => htmlspecialchars(trim($_POST['id'])),
                 ];
 
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
 
                 header('Location:/admin');
             }
@@ -168,7 +172,7 @@ class Admin
                     'order_content' => htmlspecialchars(trim($_POST['order_content'])),
                     'order_by' => htmlspecialchars(trim($_POST['id'])),
                 ];
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
         
                 header('Location: /admin');
             }
@@ -179,6 +183,6 @@ class Admin
     {
         $sql = [];
         $sql['sql'] = 'SELECT * FROM `messages`';
-        return $messages_arr =  Select($sql['sql']);
+        return $messages_arr =  DB::Select($sql['sql']);
     }
 }

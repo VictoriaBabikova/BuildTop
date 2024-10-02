@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
+
+use App\DB;
 
 class Forum
 {
@@ -13,10 +17,10 @@ class Forum
     {
         $sql = [];
         $sql['sql']="SELECT * FROM `categories`";
-        $category = Select($sql['sql']);
+        $category = DB::Select($sql['sql']);
 
         $sql['sql'] = "SELECT * FROM `topics`";
-        $topics = Select($sql['sql']);
+        $topics = DB::Select($sql['sql']);
 
         require_once "../templates/forum.tpl.php";
     }
@@ -34,16 +38,16 @@ class Forum
         $sql['param'] = [
             'id_topic' => htmlspecialchars(trim($id_topic)),
         ];
-        $topic_user = Select($sql['sql'], $sql['param']);
+        $topic_user = DB::Select($sql['sql'], $sql['param']);
 
         $sql['sql'] = "SELECT * FROM `posts` where posts.post_topic = (SELECT topics.topic_id FROM `topics` where topics.topic_id = :id_topic)";
         $sql['param'] = [
             'id_topic' => htmlspecialchars(trim($id_topic)),
         ];
-        $array_post = Select($sql['sql'], $sql['param']);
+        $array_post = DB::Select($sql['sql'], $sql['param']);
 
         $sql['sql'] = "SELECT * FROM `users`";
-        $user_info_arr = Select($sql['sql']);
+        $user_info_arr = DB::Select($sql['sql']);
 
 
         if (isset($array_post)) {
@@ -51,7 +55,7 @@ class Forum
             $sql['param'] = [
                 'id_topic' => htmlspecialchars(trim($id_topic)),
             ];
-            $post_user = Select($sql['sql'], $sql['param']);
+            $post_user = DB::Select($sql['sql'], $sql['param']);
         }
 
 
@@ -123,7 +127,7 @@ $myfile = fopen("../templates/templates_topics/topic_id_".$id_topic.".tpl.php", 
     {
         $sql = [];
         $sql['sql']="SELECT * FROM `categories`";
-        $category = Select($sql['sql']);
+        $category = DB::Select($sql['sql']);
 
         require_once "../templates/add_topic.tpl.php";
     }
@@ -145,7 +149,7 @@ $myfile = fopen("../templates/templates_topics/topic_id_".$id_topic.".tpl.php", 
                     'user_id' => $id,
                 ];
         
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
             }
             header('Location: /forum');
         }
@@ -177,7 +181,7 @@ $myfile = fopen("../templates/templates_topics/topic_id_".$id_topic.".tpl.php", 
                     'id_user' =>  htmlspecialchars(trim($_POST['id'])),
                 ];
 
-            Query($sql['sql'], $sql['param']);
+            DB::Query($sql['sql'], $sql['param']);
         }
     
         $id_topic = $_POST['path_REFERER'];

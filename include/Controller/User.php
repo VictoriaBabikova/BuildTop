@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
+use App\DB;
 use App\SendResetPasswordMail as SendResetMail;
 
 class User
@@ -51,7 +54,7 @@ class User
         if (isset($_SESSION['user_name'])) {
             $name =  $_SESSION['user_name'];
             $sql['sql'] = "SELECT * from `users` WHERE user_name = '$name'";
-            $arrayUser = Select($sql['sql']);
+            $arrayUser = DB::Select($sql['sql']);
             $_SESSION['id'] = $arrayUser[0]['user_id'];
 
             require_once "../templates/profile.tpl.php";
@@ -77,7 +80,7 @@ class User
                     'name_user' => htmlspecialchars(trim($_POST['name'])),
                     'email' => htmlspecialchars(trim($_POST['email'])),
                 ];
-                $user_info = Select($sql['sql'], $sql['param']);
+                $user_info = DB::Select($sql['sql'], $sql['param']);
             }
         
             if (!isset($user_info[0])) {
@@ -94,7 +97,7 @@ class User
                         'cookie' => $id_auth_user,
                         ];
             
-                        Query($sql['sql'], $sql['param']);
+                        DB::Query($sql['sql'], $sql['param']);
                     }
                 } else {
                     if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])) {
@@ -105,14 +108,14 @@ class User
                         'pass' => password_hash($_POST['password'], PASSWORD_DEFAULT),
                         ];
             
-                        Query($sql['sql'], $sql['param']);
+                        DB::Query($sql['sql'], $sql['param']);
                     }
                 }
                 $sql['sql'] = "SELECT * FROM `users` WHERE users.user_name = :name_user";
                 $sql['param'] = [
                     'name_user' => htmlspecialchars(trim($_POST['name'])),
                 ];
-                $userData = Select($sql['sql'], $sql['param']);
+                $userData = DB::Select($sql['sql'], $sql['param']);
 
                 $_SESSION['user_name'] = $userData[0]['user_name'];
                 $_SESSION['user'] = $userData[0]['user_level'];
@@ -143,12 +146,12 @@ class User
                     'email' => htmlspecialchars(trim($_POST['email'])),
                     'pass' => password_hash($_POST['password'], PASSWORD_DEFAULT),
                 ];
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
                 sleep(3);
             }
             $name = htmlspecialchars(trim($_POST['name']));
             $sql['sql'] = "SELECT * from `users` WHERE user_name = '$name'";
-            $arrayUser = Select($sql['sql']);
+            $arrayUser = DB::Select($sql['sql']);
 
             require_once "../templates/profile.tpl.php";
         }
@@ -169,14 +172,14 @@ class User
                 $sql['param'] = [
                     'id' => htmlspecialchars(trim($id)),
                 ];
-                $userData = Select($sql['sql'], $sql['param']);
+                $userData = DB::Select($sql['sql'], $sql['param']);
 
                 if (!empty($userData)) {
                     $sql['sql'] = "DELETE FROM `users` WHERE users.user_id = :id";
                     $sql['param'] = [
                         'id' => htmlspecialchars(trim($id)),
                     ];
-                    Query($sql['sql'], $sql['param']);
+                    DB::Query($sql['sql'], $sql['param']);
                     self::logout();
                 }
                 header('Location: /');
@@ -197,7 +200,7 @@ class User
                 'name_user' => htmlspecialchars(trim($_POST['name'])),
                 'email' => htmlspecialchars(trim($_POST['email'])),
             ];
-            $user_info_auth = Select($sql['sql'], $sql['param']);
+            $user_info_auth = DB::Select($sql['sql'], $sql['param']);
         }
 
         if (isset($user_info_auth[0])) {
@@ -214,10 +217,10 @@ class User
                     if (isset($_POST['remember'])) {
                         if ($user_info_auth[0]['cookie'] === null) {
                             $id_auth_user = hash("sha256", microtime(true) . random_int(100, PHP_INT_MAX));
-                            setcookie('id_auth_user', $id_auth_user, TIME_COOKIE, '/');
+                            setcookie('id_auth_user', $id_auth_user, strtotime($_ENV['TIME_COOKIE']), '/');
                         } else {
                             $id_auth_user = $user_info_auth[0]['cookie'];
-                            setcookie('id_auth_user', $id_auth_user, TIME_COOKIE, '/');
+                            setcookie('id_auth_user', $id_auth_user, strtotime($_ENV['TIME_COOKIE']), '/');
                         }
                         
                         self::authWithCookie($id_auth_user, $_POST['name']);
@@ -250,7 +253,7 @@ class User
             $sql['param'] = [
                 'id_auth_user' => $id_auth_user,
             ];
-            $user_data = Select($sql['sql'], $sql['param']);
+            $user_data = DB::Select($sql['sql'], $sql['param']);
         }
         if (isset($user_data[0])) {
             $_SESSION['user_name'] = $user_data[0]['user_name'];
@@ -268,7 +271,7 @@ class User
                 $sql['param'] = [
                     'cookie' => $cookie,
                 ];
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
                 self::authWithCookie($cookie, $name);
             }
         }
@@ -312,7 +315,7 @@ class User
                 'name_user' => htmlspecialchars(trim($_POST['name'])),
                 'email' => htmlspecialchars(trim($_POST['email'])),
             ];
-            $userData = Select($sql['sql'], $sql['param']);
+            $userData = DB::Select($sql['sql'], $sql['param']);
             if (!empty($userData)) {
                 $sendMail = SendResetMail::sendResetPasswordMail($_POST['email'], $_POST['name']);
                 $message = $sendMail;
@@ -341,7 +344,7 @@ class User
                 'email' => htmlspecialchars(trim($_POST['email'])),
                 'name_user' => htmlspecialchars(trim($_POST['name'])),
             ];
-            $userData = Select($sql['sql'], $sql['param']);
+            $userData = DB::Select($sql['sql'], $sql['param']);
 
             $name = $_POST['name'];
 
@@ -352,7 +355,7 @@ class User
                     'pass' => password_hash($_POST['password'], PASSWORD_DEFAULT),
                     'name_user' => htmlspecialchars(trim($_POST['name'])),
                 ];
-                Query($sql['sql'], $sql['param']);
+                DB::Query($sql['sql'], $sql['param']);
 
                 $message = "Пароль успешно восстановлен!";
 
@@ -370,7 +373,7 @@ class User
         if (isset($id)) {
             $sql = [];
             $sql['sql'] = 'SELECT * FROM `orders_moder_redact`';
-            $order_moder_redact = Select($sql['sql']);
+            $order_moder_redact = DB::Select($sql['sql']);
 
             $messages_arr = Admin::getMessagesArr();
 

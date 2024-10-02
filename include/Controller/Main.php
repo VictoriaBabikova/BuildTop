@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
+use App\DB;
 use App\SendFeedBackEmail as SendEmail;
 
 class Main
@@ -69,7 +72,7 @@ class Main
             $sql['param'] = [
                 'id_user' => $_SESSION['id'],
             ];
-            $arrayUser = Select($sql['sql'], $sql['param']);
+            $arrayUser = DB::Select($sql['sql'], $sql['param']);
         }
         require_once "../templates/feedback.tpl.php";
     }

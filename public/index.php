@@ -2,16 +2,16 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-require_once "../include/db.php";
-
 use App\ParseDataRequest;
+
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
 
 $arguments = [];
 $arguments['id_topic'] = null;
 $arguments['id'] = null;
 $arguments['email'] = null;
 $arguments['user_name'] = null;
-
 
 $URIParts = explode('?', $_SERVER['REQUEST_URI']);
 
