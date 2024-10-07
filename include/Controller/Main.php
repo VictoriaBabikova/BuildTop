@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\DB;
-use App\SendFeedBackEmail as SendEmail;
+use App\Controller\SendFeedBackEmail as SendEmail;
 
 class Main
 {
@@ -34,7 +34,7 @@ class Main
      *
      * @return void
      */
-    public static function showSuppotrPage()
+    public static function showSupportPage()
     {
         require_once "../templates/support.tpl.php";
     }
@@ -76,18 +76,16 @@ class Main
         }
         require_once "../templates/feedback.tpl.php";
     }
-    
+
+
     /**
-     * sendEmail
-     *
      * @return void
      */
-    public static function sendEmail()
+    public static function sendEmail(): void
     {
         $name = htmlspecialchars(trim($_POST['name']));
         $email = htmlspecialchars(trim($_POST['email']));
         $user_message = htmlspecialchars(trim($_POST['message']));
-        $response = SendEmail::sendFeedBackEmail($email, $name, $user_message);
-        return $response;
+        SendEmail::sendFeedBackEmail($email, $name, $user_message);
     }
 }

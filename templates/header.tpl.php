@@ -1,8 +1,8 @@
 <?php
 session_start();
 $lifetime = 3600;
-// ini_set('display_errors', 'off');
-// error_reporting(0);
+ini_set('display_errors', true);
+error_reporting(32767);
 if (isset($_COOKIE['id_auth_user'])) {
     App\Controller\User::authWithCookie($_COOKIE['id_auth_user']);
 }

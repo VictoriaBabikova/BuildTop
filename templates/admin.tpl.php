@@ -53,12 +53,14 @@
                         <select size="5" multiple name="topic">
                             <?php for ($i = 0; $i < count($category); $i++) : ?>
                                 <optgroup label="<?php print_r([$i + 1][0]) ?>.&nbsp;<?php print_r($category[$i]['cat_name']) ?>">
-                                    <?php foreach ($topics as $value) : ?>
-                                        <?php if ($value['topic_cat'] == $category[$i]['cat_id']) : ?>
-                                            <option><?php print_r($value['topic_subject']) ?></option>
-                                        <?php elseif (!($value['topic_cat'] == $category[$i]['cat_id'])) : ?>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
+                                    <?php if (isset($topics)) : ?>
+                                        <?php foreach ($topics as $value) : ?>
+                                            <?php if ($value['topic_cat'] == $category[$i]['cat_id']) : ?>
+                                                <option><?php print_r($value['topic_subject']) ?></option>
+                                            <?php elseif (!($value['topic_cat'] == $category[$i]['cat_id'])) : ?>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </optgroup>
                             <?php endfor; ?>
                         </select>

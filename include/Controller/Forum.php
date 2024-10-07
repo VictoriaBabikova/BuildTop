@@ -33,10 +33,11 @@ class Forum
      */
     public static function getTopic(int $id_topic)
     {
+        $id_topic = (string)$id_topic;
         $sql = [];
         $sql['sql'] = 'SELECT * FROM `topics` where topics.topic_id = :id_topic';
         $sql['param'] = [
-            'id_topic' => htmlspecialchars(trim($id_topic)),
+            'id_topic' => htmlspecialchars(trim((string)($id_topic))),
         ];
         $topic_user = DB::Select($sql['sql'], $sql['param']);
 
